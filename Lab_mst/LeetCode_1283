@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int left=1;
+        int right=*max_element(nums.begin(),nums.end());
+        int n=right;
+        while (left<=right){
+            int mid=(left+right)/2;
+            int sum=0;
+            for (int x:nums){
+                sum+=ceil((double)x/mid);
+            }
+            if (sum<=threshold){
+                n=mid;
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return n;
+    }
+};
